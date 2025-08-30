@@ -1,0 +1,111 @@
+using UnityEngine.UI;
+using System.Collections;
+using UnityEngine;
+
+public class Health : MonoBehaviour
+{
+    [Header("Health")]
+    [SerializeField] public float startingHealth;
+    public float currentHealth { get; private set; }
+    private Animator anim;
+    private bool dead;
+
+    [Header("Iframe")]
+    [SerializeField] private float iFramesDuration;
+    [SerializeField] private float numberOfFlashes;
+    private SpriteRenderer spriteRender;
+
+    [Header("component")]
+    [SerializeField] private Behaviour[] components;
+
+    [Header("SoundMangager")]
+    [SerializeField] private AudioClip SoundHurt;
+    [SerializeField] private AudioClip SoundDie;
+    [Header("Decay")]
+    [SerializeField] private GameObject DecayObject;
+
+    [Header("ScreenDamaged")]
+    [SerializeField] private Animator screenDamage;
+    [SerializeField] private Animator shakingCamera;
+
+    private static readonly int Hit = Animator.StringToHash("damageScreen");
+    private static readonly int Shaking = Animator.StringToHash("Saking");
+
+    public bool isPlayer;
+
+    private void Awake()
+    {
+        currentHealth = startingHealth;
+        spriteRender = GetComponent<SpriteRenderer>();
+    }
+
+    public void TakeDamage(float _damage)
+    {
+        currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+
+        if (currentHealth > 0)
+        {
+            if (isPlayer)
+            {
+                if (screenDamage != null && shakingCamera != null)
+                {
+                    screenDamage.ResetTrigger(Hit);
+                    screenDamage.SetTrigger(Hit);
+
+                    shakingCamera.ResetTrigger(Shaking);
+                    shakingCamera.SetTrigger(Shaking);
+                }
+            }
+            StartCoroutine(Invunerability());
+        }
+        else
+        if (!dead)
+        {
+            foreach (Behaviour component in components)
+            {
+                component.enabled = false;
+                Deactivate();
+            }
+
+            DecayObject.transform.SetParent(null);
+            DecayObject.SetActive(true);
+
+            if (isPlayer)
+            {
+                Debug.Log("Game Over on");
+          //      UiManager.Instance.ShowUI(UIName.GameOverScreen);
+            }
+            dead = true;
+        }
+
+    }
+    public void SetHealth(float health)
+    {
+        currentHealth = Mathf.Clamp(health, 0, startingHealth);
+    }
+
+    public void AddHealth(float _value)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
+    }
+
+    private IEnumerator Invunerability()
+    {
+        Physics2D.IgnoreLayerCollision(8, 9, true);
+        for (int i = 0; i < numberOfFlashes; i++)
+        {
+            spriteRender.color = new Color(1, 0, 0, 0.5f);
+            yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
+            spriteRender.color = new Color(0, 0.860742f, 0.8679245f, 1f);
+            yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
+        }
+
+        Physics2D.IgnoreLayerCollision(8, 9, false);
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+
+    }
+}
