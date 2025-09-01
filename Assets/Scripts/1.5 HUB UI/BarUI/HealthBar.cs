@@ -2,16 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Health playerHealth;
+    [SerializeField] private Health creatureHealth;
     [SerializeField] private Image totalhealthBar;
     [SerializeField] private Image currenthealthBar;
 
     private void Start()
     {
-        totalhealthBar.fillAmount = playerHealth.startingHealth / playerHealth.startingHealth;
+        totalhealthBar.fillAmount = creatureHealth.StartingHealth / creatureHealth.StartingHealth;
     }
     private void Update()
     {
-        currenthealthBar.fillAmount = playerHealth.currentHealth / playerHealth.startingHealth;
+        currenthealthBar.fillAmount = creatureHealth.CurrentHealth / creatureHealth.StartingHealth;
     }
 }

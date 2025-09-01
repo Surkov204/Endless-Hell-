@@ -13,9 +13,15 @@ public class SpawnObject : MonoBehaviour
     [SerializeField] private float minY = -2f;
     [SerializeField] private float maxY = 2f;               
 
-    private void Start()
+    private void OnEnable()
     {
         InvokeRepeating(nameof(SpawnObstacle), spawnStartingTime, spawnInterval);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
+        StopAllCoroutines();
     }
 
     void SpawnObstacle()

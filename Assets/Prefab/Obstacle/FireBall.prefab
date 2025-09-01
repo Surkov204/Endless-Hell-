@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1577114898427027227}
   - component: {fileID: 7575723758129294287}
   - component: {fileID: 3633063201299606058}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,6 +128,7 @@ MonoBehaviour:
   speed: 3
   lifetime: 10
   damage: 40
+  isTornado: 0
 --- !u!61 &7575723758129294287
 BoxCollider2D:
   m_ObjectHideFlags: 0

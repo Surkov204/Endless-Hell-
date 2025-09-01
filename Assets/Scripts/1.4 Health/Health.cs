@@ -5,8 +5,11 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] public float startingHealth;
-    public float currentHealth { get; private set; }
+    [SerializeField] private float startingHealth;
+    public float StartingHealth => startingHealth;
+    private float currentHealth;
+    public float CurrentHealth => currentHealth;
+
     private Animator anim;
     private bool dead;
 
@@ -22,7 +25,7 @@ public class Health : MonoBehaviour
     [SerializeField] private AudioClip SoundHurt;
     [SerializeField] private AudioClip SoundDie;
     [Header("Decay")]
-    [SerializeField] private GameObject DecayObject;
+    [SerializeField] private GameObject decayPrefab;
 
     [Header("ScreenDamaged")]
     [SerializeField] private Animator screenDamage;
@@ -32,6 +35,7 @@ public class Health : MonoBehaviour
     private static readonly int Shaking = Animator.StringToHash("Saking");
 
     public bool isPlayer;
+    public bool isCanon;
 
     private void Awake()
     {
@@ -61,19 +65,25 @@ public class Health : MonoBehaviour
         else
         if (!dead)
         {
+            if (isCanon) return;
+
             foreach (Behaviour component in components)
             {
                 component.enabled = false;
                 Deactivate();
             }
 
-            DecayObject.transform.SetParent(null);
-            DecayObject.SetActive(true);
+
+            if (decayPrefab != null)
+            {
+                GameObject decayInstance = Instantiate(decayPrefab, transform.position, Quaternion.identity);
+                decayInstance.SetActive(true);
+            }
 
             if (isPlayer)
             {
                 Debug.Log("Game Over on");
-          //      UiManager.Instance.ShowUI(UIName.GameOverScreen);
+                //      UiManager.Instance.ShowUI(UIName.GameOverScreen);
             }
             dead = true;
         }
@@ -91,7 +101,7 @@ public class Health : MonoBehaviour
 
     private IEnumerator Invunerability()
     {
-        Physics2D.IgnoreLayerCollision(8, 9, true);
+        Physics2D.IgnoreLayerCollision(9, 10, true);
         for (int i = 0; i < numberOfFlashes; i++)
         {
             spriteRender.color = new Color(1, 0, 0, 0.5f);
@@ -100,12 +110,21 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
         }
 
-        Physics2D.IgnoreLayerCollision(8, 9, false);
+        Physics2D.IgnoreLayerCollision(9, 10, false);
     }
 
     public void Deactivate()
     {
         gameObject.SetActive(false);
 
+    }
+
+    public void SetHealh(float value){
+        currentHealth = value;
+    }
+
+    public float GetHealh()
+    {
+        return currentHealth;
     }
 }

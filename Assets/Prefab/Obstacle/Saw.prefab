@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4017453446455871303}
   - component: {fileID: 3076986800656720923}
   - component: {fileID: -4769112961897787203}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Saw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,6 +50,7 @@ MonoBehaviour:
   speed: 5
   lifetime: 10
   damage: 20
+  isTornado: 0
 --- !u!61 &3076986800656720923
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134,7 +135,7 @@ GameObject:
   - component: {fileID: 5630977902470902669}
   - component: {fileID: 7079913155102956200}
   - component: {fileID: 1027716411976987327}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpinSaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
