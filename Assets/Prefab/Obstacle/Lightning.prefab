@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 175687612995884251}
   - component: {fileID: 290286512044098517}
   - component: {fileID: 6160665440644322545}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,6 +174,7 @@ MonoBehaviour:
   speed: 0
   lifetime: 10
   damage: 1
+  isTornado: 0
 --- !u!1001 &942638198914143876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,13 +247,29 @@ PrefabInstance:
       propertyPath: fieldOfImpact
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 462627473144409555, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 682024671589714177, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 803497997129971120, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1148693949970072960, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1321937779899636420, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419206110863126552, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1887246535154841841, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_Mass
@@ -262,9 +279,17 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2415142658675620754, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3160615652656056019, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_Name
       value: Decay
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160615652656056019, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3198615316322685215, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_Mass
@@ -285,6 +310,14 @@ PrefabInstance:
     - target: {fileID: 4019660287094428057, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_Mass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035168852672438991, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163817277857481131, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4248484490859554556, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_Mass
@@ -310,17 +343,45 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4788466232641826378, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5029069751793662124, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_Mass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5670731362568394554, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5825806256818725822, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5967125200877493350, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6289153885776881670, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6290629814452409528, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6360813264621550519, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6419932654464423460, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596265591473868458, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6822076753297715253, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_Mass
@@ -342,6 +403,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8252098279029001796, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8268451148476446849, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -353,6 +418,10 @@ PrefabInstance:
     - target: {fileID: 8520884237394414019, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_Mass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8541176467541999854, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8885015634663247778, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
       propertyPath: m_IsTrigger

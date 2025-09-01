@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 public class LightningSpawner : MonoBehaviour
 {
     [Header("Prefabs")]
@@ -12,10 +13,23 @@ public class LightningSpawner : MonoBehaviour
     [SerializeField] private float warningDuration = 1f;
     [SerializeField] private float startSpawn = 1f;
 
-    private void Start()
+    private List<GameObject> activeWarnings = new List<GameObject>();
+
+    private void OnEnable()
     {
-        Vector3 spawnPos = lightningPoint.position;
         InvokeRepeating(nameof(SpawnLightning), startSpawn, spawnInterval);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
+        StopAllCoroutines();
+
+        foreach (var w in activeWarnings)
+        {
+            if (w != null) Destroy(w);
+        }
+        activeWarnings.Clear();
     }
 
     private void SpawnLightning()
@@ -29,7 +43,7 @@ public class LightningSpawner : MonoBehaviour
                Quaternion.identity,
                lightningPoint   
            );
-
+        activeWarnings.Add(warning);
         StartCoroutine(SpawnLightningAfterDelay(warning));
     }
 
@@ -37,7 +51,7 @@ public class LightningSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(warningDuration);
 
-        Destroy(warning);
+        if(warning != null) Destroy(warning);
         Vector3 spawnPos = lightningPoint.position;
         spawnPos.z = 0.96f;
         GameObject lightning = Instantiate(

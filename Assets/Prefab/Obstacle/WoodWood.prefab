@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1651231576294646022}
   - component: {fileID: 8297483295122347917}
   - component: {fileID: 828042798151727025}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WoodWood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ceb37621d6e2844b67f759b75a98ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 4
   lifetime: 10
   damage: 20
+  isTornado: 0

@@ -4,7 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Jump Value")]
     [SerializeField] private float jumpPower;
-    [SerializeField] private float jumpHoldForce = 0.5f;  
+    [SerializeField] private float jumpHoldForce = 0.5f;
     [SerializeField] private float jumpHoldDuration = 0.2f;
 
     private bool isJumping;
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         {
             movementvalue = 0;
         }
-        PlayerBody.linearVelocity = new Vector2(movementvalue * speed , PlayerBody.linearVelocity.y);
+        PlayerBody.linearVelocity = new Vector2(movementvalue * speed, PlayerBody.linearVelocity.y);
     }
 
     private void PlayerJump() {
@@ -76,6 +76,10 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
         }
+    }
+
+    public void ThrowUpByTornado(){
+        PlayerBody.linearVelocity = new Vector2(PlayerBody.linearVelocity.x, 30f);
     }
 
     private bool isGrounded()

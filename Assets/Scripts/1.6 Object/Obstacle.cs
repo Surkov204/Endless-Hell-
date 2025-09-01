@@ -1,10 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float lifetime = 10f;
     [SerializeField] protected private float damage;
+    [SerializeField] private bool isTornado = false;
 
     private void Start()
     {
@@ -21,7 +22,16 @@ public class Obstacle : MonoBehaviour
         if (collision.tag == "Player")
         {
             collision.GetComponent<Health>().TakeDamage(damage);
-            Debug.Log(damage);
+            if (isTornado)
+            {
+                PlayerController player = collision.GetComponent<PlayerController>();
+                if (player != null)
+                {
+                    player.ThrowUpByTornado();
+                    Debug.Log("hat tung");
+                }
+            }
+
         }
     }
 }
