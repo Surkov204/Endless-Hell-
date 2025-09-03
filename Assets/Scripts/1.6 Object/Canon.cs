@@ -28,6 +28,7 @@ public class Canon : MonoBehaviour
 
     public void CanonFire() {
         anim.SetBool(canonAnimationClip, false);
+        AudioManager.Instance.PlaySoundFX(SoundFXLibrary.SoundFXName.Canon);
         GameObject bullet = Instantiate(bulletConon, firePoint.position, Quaternion.identity);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.linearVelocity = new Vector2(speedRate, 0);

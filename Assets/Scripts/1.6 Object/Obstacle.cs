@@ -7,6 +7,11 @@ public class Obstacle : MonoBehaviour
     [SerializeField] protected private float damage;
     [SerializeField] private bool isTornado = false;
 
+    private void OnEnable()
+    {
+        if (isTornado) AudioManager.Instance.PlaySoundFX(SoundFXLibrary.SoundFXName.Tornado);
+    }
+
     private void Start()
     {
         Destroy(gameObject, lifetime);

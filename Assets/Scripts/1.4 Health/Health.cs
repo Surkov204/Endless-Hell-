@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine;
+using JS;
 
 public class Health : MonoBehaviour
 {
@@ -9,8 +10,6 @@ public class Health : MonoBehaviour
     public float StartingHealth => startingHealth;
     private float currentHealth;
     public float CurrentHealth => currentHealth;
-
-    private Animator anim;
     private bool dead;
 
     [Header("Iframe")]
@@ -20,19 +19,8 @@ public class Health : MonoBehaviour
 
     [Header("component")]
     [SerializeField] private Behaviour[] components;
-
-    [Header("SoundMangager")]
-    [SerializeField] private AudioClip SoundHurt;
-    [SerializeField] private AudioClip SoundDie;
     [Header("Decay")]
     [SerializeField] private GameObject decayPrefab;
-
-    [Header("ScreenDamaged")]
-    [SerializeField] private Animator screenDamage;
-    [SerializeField] private Animator shakingCamera;
-
-    private static readonly int Hit = Animator.StringToHash("damageScreen");
-    private static readonly int Shaking = Animator.StringToHash("Saking");
 
     public bool isPlayer;
     public bool isCanon;
@@ -51,14 +39,7 @@ public class Health : MonoBehaviour
         {
             if (isPlayer)
             {
-                if (screenDamage != null && shakingCamera != null)
-                {
-                    screenDamage.ResetTrigger(Hit);
-                    screenDamage.SetTrigger(Hit);
-
-                    shakingCamera.ResetTrigger(Shaking);
-                    shakingCamera.SetTrigger(Shaking);
-                }
+                AudioManager.Instance.PlaySoundFX(SoundFXLibrary.SoundFXName.PlayerHurt);
             }
             StartCoroutine(Invunerability());
         }
@@ -83,7 +64,8 @@ public class Health : MonoBehaviour
             if (isPlayer)
             {
                 Debug.Log("Game Over on");
-                //      UiManager.Instance.ShowUI(UIName.GameOverScreen);
+                AudioManager.Instance.PlaySoundFX(SoundFXLibrary.SoundFXName.PlayerDeath);
+                UIManager.Instance.ShowUI(UIName.GameOverScreen);
             }
             dead = true;
         }
