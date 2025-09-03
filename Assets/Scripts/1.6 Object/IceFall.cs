@@ -23,6 +23,7 @@ public class IceFall : MonoBehaviour
         if (collision.collider.tag == "Player")
         {
             collision.collider.GetComponent<Health>().TakeDamage(damaged);
+            AudioManager.Instance.PlaySoundFX(SoundFXLibrary.SoundFXName.IceBreak);
             anim.SetTrigger("IceFalled");
             Destroy(gameObject, 0.5f);
         }
@@ -30,7 +31,7 @@ public class IceFall : MonoBehaviour
         if (!hasFallen && collision.collider.CompareTag(groundTag))
         {
             hasFallen = true;
-
+            AudioManager.Instance.PlaySoundFX(SoundFXLibrary.SoundFXName.IceBreak);
             anim.SetTrigger("IceFalled");
             Destroy(gameObject, 0.5f);
         }

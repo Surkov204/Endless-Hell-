@@ -60,7 +60,7 @@ public class LightningSpawner : MonoBehaviour
             Quaternion.identity,
             lightningPoint  
         );
-
+        AudioManager.Instance.PlaySoundFX(SoundFXLibrary.SoundFXName.Lighting);
         Destroy(lightning, 0.5f); 
     }
 }

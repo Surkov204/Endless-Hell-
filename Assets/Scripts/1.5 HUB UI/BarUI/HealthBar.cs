@@ -8,7 +8,7 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        totalhealthBar.fillAmount = creatureHealth.StartingHealth / creatureHealth.StartingHealth;
+        totalhealthBar.fillAmount = creatureHealth.CurrentHealth / creatureHealth.StartingHealth;
     }
     private void Update()
     {

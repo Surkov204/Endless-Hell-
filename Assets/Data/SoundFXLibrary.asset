@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4939398b02647224f8ba8741cc6eb7ec, type: 3}
+  m_Name: SoundFXLibrary
+  m_EditorClassIdentifier: 
+  sounds:
+  - soundName: 3
+    clip: {fileID: 8300000, guid: ca964b01587ec89428aab39194549448, type: 3}
+  - soundName: 6
+    clip: {fileID: 8300000, guid: 5163d71aa1b966c408804994de36174e, type: 3}
+  - soundName: 7
+    clip: {fileID: 8300000, guid: cee6e6952dd0d9746a84c1c1c64e74d8, type: 3}
+  - soundName: 8
+    clip: {fileID: 8300000, guid: 01252c5d77fb8f549841706fc4025fcd, type: 3}
+  - soundName: 2
+    clip: {fileID: 8300000, guid: bbdaff967d153bd4b90849ecd5405112, type: 3}
+  - soundName: 9
+    clip: {fileID: 8300000, guid: 99c5a08205f36794797c76a195022bb2, type: 3}
+  - soundName: 10
+    clip: {fileID: 8300000, guid: 4facf26871d13e745be269d88f8cd3f7, type: 3}
+  - soundName: 11
+    clip: {fileID: 8300000, guid: 26e894f53adb5a245b369d024557f764, type: 3}

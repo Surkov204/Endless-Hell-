@@ -16,7 +16,7 @@ public class BulletCanon : MonoBehaviour
                 playerHealth.TakeDamage(damage);
             }
             AnimationManager.Instance.Play(AnimationClipName.ShakingByBullet, AnimatorTarget.CameraShaking);
-            Debug.Log("play");
+            AudioManager.Instance.PlaySoundFX(SoundFXLibrary.SoundFXName.Explosion);
             SpawnEffect();
             Destroy(gameObject);
         }
