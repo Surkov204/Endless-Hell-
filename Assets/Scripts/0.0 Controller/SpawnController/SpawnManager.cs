@@ -2,10 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PhaseType
+{
+    Normal,
+    Ice,
+    Cannon
+}
+
 public class SpawnManager : MonoBehaviour
 {
     [Header("Spawners Normal")]
     [SerializeField] private MonoBehaviour[] normalSpawners;
+
+    [Header("Spawners Lighting")]
+    [SerializeField] private MonoBehaviour[] lightSpawners;
 
     [Header("Spawners Animal")]
     [SerializeField] private MonoBehaviour[] aniamlSpawners;
@@ -21,13 +31,15 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private Health canonHealth;
     [SerializeField] private float canonUpY = -2f;         
     [SerializeField] private float canonDownY = -4f;       
-    [SerializeField] private float canonEnableDuration = 30f; 
     [SerializeField] private float canonMoveSpeed = 2f;    
-
 
     [Header("Timing")]
     [SerializeField] private float normalPhaseDuration = 15f;
     [SerializeField] private float icePhaseDuration = 30f;
+    [SerializeField] private float canonEnableDuration = 30f;
+
+    [Header("Title")]
+    [SerializeField] private QuestTitleUI questTitleUI;
 
     private void Start()
     {
@@ -38,36 +50,51 @@ public class SpawnManager : MonoBehaviour
     {
         while (true)
         {
+            yield return RunPhase(PhaseType.Normal, normalPhaseDuration);
+            yield return RunPhase(PhaseType.Ice, icePhaseDuration);
+            yield return RunPhase(PhaseType.Cannon, canonEnableDuration, true);
+        }
+    }
 
-            Debug.Log("Normal Phase ON");
+    private IEnumerator RunPhase(PhaseType phase, float duration, bool isCanon = false)
+    {
+        Debug.Log($"{phase} Phase ON");
+        yield return new WaitForSeconds(0.5f);
+        questTitleUI.ShowQuestTitle($"{phase} Phase");
+        switch (phase)
+        {
+            case PhaseType.Normal:
+                SetSpawnersActive(normalSpawners, true);
+                SetSpawnersActive(aniamlSpawners, true);
+                SetSpawnersActive(lightSpawners, true);
+                if (iceSpawner) iceSpawner.enabled = false;
+                if (bombSpawner) bombSpawner.enabled = false;
+                break;
 
-            foreach (var spawner in normalSpawners)
-                if (spawner != null) spawner.enabled = true;
-            foreach (var spawner in aniamlSpawners)
-                if (spawner != null) spawner.enabled = true;
+            case PhaseType.Ice:
+                SetSpawnersActive(normalSpawners, false);
+                SetSpawnersActive(lightSpawners, false);
+                if (iceSpawner) iceSpawner.enabled = true;
+                break;
 
-            if (iceSpawner != null) iceSpawner.enabled = false;
-            if (bombSpawner != null) bombSpawner.enabled = false;
+            case PhaseType.Cannon:
+                if (iceSpawner) iceSpawner.enabled = false;
+                SetSpawnersActive(aniamlSpawners, false);
+                SetSpawnersActive(lightSpawners, true);
+                if (bombSpawner) bombSpawner.enabled = true;
+                break;
+        }
 
-            yield return new WaitForSeconds(normalPhaseDuration);
-
-            Debug.Log("Ice Phase ON");
-
-            foreach (var spawner in normalSpawners)
-                if (spawner != null) spawner.enabled = false;
-
-            if (iceSpawner != null) iceSpawner.enabled = true;
-
-            yield return new WaitForSeconds(icePhaseDuration);
-
-            if (iceSpawner != null) iceSpawner.enabled = false;
-            foreach (var spawner in aniamlSpawners)
-                if (spawner != null) spawner.enabled = false;
-
-            Debug.Log("Canon Phase ON");
-            if (bombSpawner != null) bombSpawner.enabled = true;
+        if (isCanon)
+        {
             yield return StartCoroutine(ActivateCanon());
         }
+        else
+        {
+            yield return new WaitForSeconds(duration);
+        }
+
+        questTitleUI.HideQuestTitle();
     }
 
     private IEnumerator ActivateCanon()
@@ -97,6 +124,8 @@ public class SpawnManager : MonoBehaviour
             yield return null;
         }
 
+        if (canonHealth.CurrentHealth <= 0f) ScoreManager.Instance.ScoreApply(ScoreType.Hard);
+
         Debug.Log("Canon Phase OFF");
         canonScript.enabled = false;
         Vector3 downPos = new Vector3(startPos.x, canonDownY, startPos.z);
@@ -113,5 +142,11 @@ public class SpawnManager : MonoBehaviour
         canonObject.transform.localPosition = downPos;
         canonHealth.SetHealh(2000f);
         canonObject.SetActive(false);
+    }
+
+    private void SetSpawnersActive(MonoBehaviour[] spawners, bool active)
+    {
+        foreach (var spawner in spawners)
+            if (spawner != null) spawner.enabled = active;
     }
 }
