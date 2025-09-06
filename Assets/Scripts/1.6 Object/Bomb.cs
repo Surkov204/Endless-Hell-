@@ -49,6 +49,7 @@ public class Bomb : MonoBehaviour
             }
         }
         AudioManager.Instance.PlaySoundFX(SoundFXLibrary.SoundFXName.Explosion);
+        ScoreManager.Instance.ScoreApply(ScoreType.Easy);
         anim.SetTrigger("isExplode");
         Destroy(BombObject, 1.0f);
     }

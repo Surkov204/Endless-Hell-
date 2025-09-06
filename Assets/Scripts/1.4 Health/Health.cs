@@ -48,6 +48,8 @@ public class Health : MonoBehaviour
         {
             if (isCanon) return;
 
+            ScoreManager.Instance.ScoreApply(ScoreType.Normal);
+
             foreach (Behaviour component in components)
             {
                 component.enabled = false;
@@ -66,6 +68,7 @@ public class Health : MonoBehaviour
                 Debug.Log("Game Over on");
                 AudioManager.Instance.PlaySoundFX(SoundFXLibrary.SoundFXName.PlayerDeath);
                 UIManager.Instance.ShowUI(UIName.GameOverScreen);
+                ScoreManager.Instance.StopAplyScore();
             }
             dead = true;
         }

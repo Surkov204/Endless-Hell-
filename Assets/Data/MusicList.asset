@@ -15,3 +15,5 @@ MonoBehaviour:
   sceneMusicList:
   - sceneName: MainGame_1
     musicClip: {fileID: 8300000, guid: 0b5952d30f783354b9a687ad4e857d2a, type: 3}
+  - sceneName: MainMenu
+    musicClip: {fileID: 8300000, guid: 0b5952d30f783354b9a687ad4e857d2a, type: 3}

@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
     {
         PlayerJump();
         PlayerCanMove();
-        gunFireAction.PlayerShooting();
     }
 
     private void PlayerCanMove() {

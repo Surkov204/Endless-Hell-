@@ -1,6 +1,7 @@
 using JS;
 using JS.Utils;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -14,15 +15,11 @@ public class UIController : MonoBehaviour
 
     public void TogglePauseMenu()
     {
+        if (UIManager.Instance.IsUIShowing(UIName.GameOverScreen)) return;
 
-        if (UIManager.Instance.IsUIShowing(UIName.GameSettingScreen))
-        {
-            UIManager.Instance.HideUI(UIName.GameSettingScreen);
-            return;
-        }
+        if (SceneManager.GetActiveScene().name == "MainMenu") return;
 
-        if (!isPauseMenuShowing) ShowPauseMenu();
-        else HidePauseMenu();
+        if (!isPauseMenuShowing) ShowPauseMenu(); else HidePauseMenu();
     }
 
     public void ShowPauseMenu()

@@ -388,12 +388,9 @@ MonoBehaviour:
   numberOfFlashes: 0
   components:
   - {fileID: 8662802708312671663}
-  SoundHurt: {fileID: 0}
-  SoundDie: {fileID: 0}
   decayPrefab: {fileID: 3160615652656056019, guid: 2bdb627706b58b341b5ff6b043a1299b, type: 3}
-  screenDamage: {fileID: 0}
-  shakingCamera: {fileID: 0}
   isPlayer: 0
+  isCanon: 0
 --- !u!114 &5813277944497803645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,9 +418,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ceb37621d6e2844b67f759b75a98ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 2
   lifetime: 10
   damage: 30
+  isTornado: 0
 --- !u!1 &7886433866933384571
 GameObject:
   m_ObjectHideFlags: 0

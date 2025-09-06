@@ -44,5 +44,7 @@ public class PauseMenuPopup : UIBase
 
     public void OnQuitClick()
     {
+        SceneLoader.Load(gameplaySceneName);
+        Time.timeScale = 1;
     }
 }
