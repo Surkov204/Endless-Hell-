@@ -4166,7 +4166,7 @@ MonoBehaviour:
   warningPrefab: {fileID: 4503690606684600860, guid: aa57619014f946e42851ba8873b03c5e, type: 3}
   lightningPrefab: {fileID: 6463067819429819492, guid: 35cf0afbdaade7e45b833da548386f88, type: 3}
   lightningPoint: {fileID: 1597217174}
-  spawnInterval: 1
+  spawnInterval: 5
   warningDuration: 1
   startSpawn: 10
 --- !u!1 &1609854401
